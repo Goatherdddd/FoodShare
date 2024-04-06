@@ -10,13 +10,16 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using MySqlX.XDevAPI.Common;
+using Bunifu.UI.WinForms;
+using System.Security.Cryptography.X509Certificates;
 
 namespace FoodShare
 {
     public partial class Form2 : Form
     {
-
-        MySqlConnection connection = new MySqlConnection("server=sql11.freemysqlhosting.net;user=sql11693979;database=sql11693979;port=3306;password=wpZrAv9L4v");
+        public static Form2 instance;
+        public BunifuTextBox tb1;
+        MySqlConnection connection = new MySqlConnection("server = sql11.freemysqlhosting.net; user = sql11697088; database = sql11697088; port = 3306; password = 1cUFiClRQG");
         MySqlDataAdapter adapter;
         DataTable DataTable = new DataTable();
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -56,7 +59,7 @@ namespace FoodShare
                 {
 
                     password = bunifuTextBox3.Text;
-                    string insetQuery = "INSERT INTO `rgister` (`username`, `password`, `city`, `backupcode`) VALUES('" + bunifuTextBox1.Text + "','" + password.ToString() + "', '" + bunifuTextBox4.Text + "', '" + result.ToString() + "');";
+                    string insetQuery = "INSERT INTO `rgister` (`username`, `password`, `city`, `backupcode`, `ph_number`) VALUES('" + bunifuTextBox1.Text + "','" + password.ToString() + "', '" + bunifuTextBox4.Text + "', '" + result.ToString() + "', '" + bunifuTextBox5.Text + "');";
                     connection.Open();
                     MySqlCommand command = new MySqlCommand(insetQuery, connection);
                     try
@@ -84,6 +87,11 @@ namespace FoodShare
             {
                 MessageBox.Show("Паролата не съвпада.");
             }
+        }
+
+        private void bunifuImageButton2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
